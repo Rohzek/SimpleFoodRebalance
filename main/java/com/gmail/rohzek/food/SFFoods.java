@@ -3,7 +3,9 @@ package com.gmail.rohzek.food;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.gmail.rohzek.api.classes.FoodSpoilable;
 import com.gmail.rohzek.lib.Reference;
+import com.gmail.rohzek.util.LogHelper;
 
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
@@ -18,7 +20,18 @@ import net.minecraftforge.registries.IForgeRegistry;
 @ObjectHolder(Reference.MODID)
 public class SFFoods
 {
-	public static void registerRenders() {}
+	public static int timeDay = 24000; // ticks for one whole day. Default: 24000
+	public static int fresh = 0, stale = 1, moldy = 2;
+	public static String conFresh = "fresh", conStale = "stale", conMoldy = "moldy";
+	
+	public static FoodSpoilable APPLE = new FoodSpoilable("apple", 1, 0.5f, false, 300, true);
+	
+	public static void registerRenders() 
+	{
+		registerRender(APPLE, fresh, conFresh);
+		registerRender(APPLE, stale, conStale);
+		registerRender(APPLE, moldy, conMoldy);
+	}
 	
 	public static void registerOreDicts() {}
 	
@@ -29,7 +42,9 @@ public class SFFoods
 	
 	public static void registerRender(Item item, int meta, String addon)
 	{	
-		ModelLoader.setCustomModelResourceLocation(item, meta, new ModelResourceLocation(item.getRegistryName() + addon, "inventory"));
+		ModelResourceLocation loc = new ModelResourceLocation(item.getRegistryName() + addon, "inventory");
+		ModelLoader.setCustomModelResourceLocation(item, meta, loc);
+		LogHelper.log("Should be registering: " + loc.getResourcePath());
 	}
 	
 	public static void registerOreDict(String name, Item item) 
@@ -47,7 +62,7 @@ public class SFFoods
 		{
 			final Item[] items =
 			{
-
+					APPLE,
 			};
 			
 			final IForgeRegistry<Item> registry = event.getRegistry();

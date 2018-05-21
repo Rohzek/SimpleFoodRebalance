@@ -13,6 +13,8 @@ public class ConfigurationManager
 	
 	public static boolean isDebug;
 	
+	public static boolean foodSpoils;
+	
 	public static String genCategory = "general";
 	public static String debugCategory = "debug";
 	public static String modCategory = "compatibility";
@@ -32,6 +34,8 @@ public class ConfigurationManager
 		config.load();
 		
 		this.isDebug = config.get(debugCategory, "debugMode", false, "Enables more printouts to the chat. WARNING: Will spam the log file. Good for bug reports. Not recommended for regular play.").getBoolean(false);
+		
+		this.foodSpoils = config.get(genCategory, "foodSpoilage", true, "If true, food will spoil over time. If false, it will not. Note: Setting this to false will NOT allow food to stack again.").getBoolean(true);
 		
 		config.save();
 	}

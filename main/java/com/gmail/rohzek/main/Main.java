@@ -53,9 +53,6 @@ public class Main
 	{
 		LogHelper.debug("Beginning Initialization");
 		
-		LogHelper.debug("Registering Proxy Renders");
-		proxy.registerRenders();
-		
 		LogHelper.debug("Initialization Complete");
 	}
 	

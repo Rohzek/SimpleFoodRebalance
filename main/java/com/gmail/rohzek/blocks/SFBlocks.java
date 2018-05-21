@@ -28,13 +28,10 @@ public class SFBlocks
 	public static final Block PUMPKIN_FACE = new SFPumpkinFace("pumpkinFace");
 	public static final Block PUMPKIN_FACE_LIT = new SFPumpkinFaceLit("pumpkinFaceLit");
 	
-	// ItemBlocks
-	public static final ItemBlock MELON_ITEM = new ItemBlock(MELON);
-	public static final ItemBlock PUMPKIN_ITEM = new ItemBlock(PUMPKIN);
-	public static final ItemBlock PUMPKIN_FACE_ITEM = new ItemBlock(PUMPKIN_FACE);
-	public static final ItemBlock PUMPKIN_FACE_LIT_ITEM = new ItemBlock(PUMPKIN_FACE_LIT);
-	
-	public static void registerRenders() {}
+	public static void registerRenders() 
+	{
+		registerRender(MELON);
+	}
 	
 	public static void registerOreDicts() {}
 	
@@ -53,8 +50,6 @@ public class SFBlocks
 	@Mod.EventBusSubscriber
 	public static class RegistrationHandler 
 	{
-		public static final Set<ItemBlock> ITEM_BLOCKS = new HashSet<ItemBlock>();
-
 		@SubscribeEvent
 		public static void registerBlocks(RegistryEvent.Register<Block> event) 
 		{
@@ -63,9 +58,6 @@ public class SFBlocks
 			final Block[] blocks = 
 			{
 					MELON,
-					PUMPKIN,
-					PUMPKIN_FACE,
-					PUMPKIN_FACE_LIT,
 			};
 
 			registry.registerAll(blocks);
@@ -76,10 +68,7 @@ public class SFBlocks
 		{
 			final ItemBlock[] items = 
 			{
-					MELON_ITEM,
-					PUMPKIN_ITEM,
-					PUMPKIN_FACE_ITEM,
-					PUMPKIN_FACE_LIT_ITEM,
+					new ItemBlock(MELON),
 					
 			};
 
@@ -88,7 +77,6 @@ public class SFBlocks
 			for (final ItemBlock item : items) 
 			{
 				registry.register(item.setRegistryName(item.getBlock().getRegistryName()));
-				ITEM_BLOCKS.add(item);
 			}
 		}
 	}
