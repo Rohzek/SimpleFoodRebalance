@@ -10,6 +10,7 @@ import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -28,19 +29,8 @@ public class SFBlocks
 	public static final Block PUMPKIN_FACE = new SFPumpkinFace("pumpkinFace");
 	public static final Block PUMPKIN_FACE_LIT = new SFPumpkinFaceLit("pumpkinFaceLit");
 	
-	public static void registerRenders() 
-	{
-		registerRender(MELON);
-	}
 	
 	public static void registerOreDicts() {}
-	
-	public static void registerTileEntities(){}
-	
-	public static void registerRender(Block block)
-	{	
-		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), 0, new ModelResourceLocation(block.getRegistryName(), "inventory"));
-	}
 	
 	public static void registerOreDict(String name, Block block) 
 	{
@@ -51,6 +41,20 @@ public class SFBlocks
 	public static class RegistrationHandler 
 	{
 		@SubscribeEvent
+		public static void registerRenders(ModelRegistryEvent event) 
+		{
+			registerRender(MELON);
+			registerRender(PUMPKIN);
+			registerRender(PUMPKIN_FACE);
+			registerRender(PUMPKIN_FACE_LIT);
+		}
+		
+		public static void registerRender(Block block)
+		{	
+			ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), 0, new ModelResourceLocation(block.getRegistryName(), "inventory"));
+		}
+		
+		@SubscribeEvent
 		public static void registerBlocks(RegistryEvent.Register<Block> event) 
 		{
 			final IForgeRegistry<Block> registry = event.getRegistry();
@@ -58,6 +62,9 @@ public class SFBlocks
 			final Block[] blocks = 
 			{
 					MELON,
+					PUMPKIN,
+					PUMPKIN_FACE,
+					PUMPKIN_FACE_LIT,
 			};
 
 			registry.registerAll(blocks);
@@ -69,7 +76,9 @@ public class SFBlocks
 			final ItemBlock[] items = 
 			{
 					new ItemBlock(MELON),
-					
+					new ItemBlock(PUMPKIN),
+					new ItemBlock(PUMPKIN_FACE),
+					new ItemBlock(PUMPKIN_FACE_LIT),
 			};
 
 			final IForgeRegistry<Item> registry = event.getRegistry();
@@ -79,10 +88,12 @@ public class SFBlocks
 				registry.register(item.setRegistryName(item.getBlock().getRegistryName()));
 			}
 		}
-	}
-
-	private static void registerTileEntity(Class<? extends TileEntity> tileEntityClass, String name) 
-	{
-		GameRegistry.registerTileEntity(tileEntityClass, Reference.RESOURCEID + name);
+		
+		public static void registerTileEntities(){}
+		
+		private static void registerTileEntity(Class<? extends TileEntity> tileEntityClass, String name) 
+		{
+			GameRegistry.registerTileEntity(tileEntityClass, Reference.RESOURCEID + name);
+		}
 	}
 }

@@ -9,6 +9,7 @@ import com.gmail.rohzek.util.LogHelper;
 
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
+import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -26,26 +27,7 @@ public class SFFoods
 	
 	public static FoodSpoilable APPLE = new FoodSpoilable("apple", 1, 0.5f, false, 300, true);
 	
-	public static void registerRenders() 
-	{
-		registerRender(APPLE, fresh, conFresh);
-		registerRender(APPLE, stale, conStale);
-		registerRender(APPLE, moldy, conMoldy);
-	}
-	
 	public static void registerOreDicts() {}
-	
-	public static void registerRender(Item item)
-	{	
-		ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName(), "inventory"));
-	}
-	
-	public static void registerRender(Item item, int meta, String addon)
-	{	
-		ModelResourceLocation loc = new ModelResourceLocation(item.getRegistryName() + addon, "inventory");
-		ModelLoader.setCustomModelResourceLocation(item, meta, loc);
-		LogHelper.log("Should be registering: " + loc.getResourcePath());
-	}
 	
 	public static void registerOreDict(String name, Item item) 
 	{
@@ -55,7 +37,24 @@ public class SFFoods
 	@Mod.EventBusSubscriber
 	public static class RegistrationHandler 
 	{
-		public static final Set<Item> ITEMS = new HashSet<Item>();
+		@SubscribeEvent
+		public static void registerRenders(ModelRegistryEvent event)
+		{
+			registerRender(APPLE, fresh, conFresh);
+			registerRender(APPLE, stale, conStale);
+			registerRender(APPLE, moldy, conMoldy);
+		}
+		
+		public static void registerRender(Item item)
+		{	
+			ModelLoader.setCustomModelResourceLocation(item, 0, new ModelResourceLocation(item.getRegistryName(), "inventory"));
+		}
+		
+		public static void registerRender(Item item, int meta, String addon)
+		{	
+			System.out.println("I should be registering " + item.getRegistryName() + addon);
+			ModelLoader.setCustomModelResourceLocation(item, meta, new ModelResourceLocation(item.getRegistryName() + addon, "inventory"));
+		}
 		
 		@SubscribeEvent
 		public static void registerItems(RegistryEvent.Register<Item> event) 
@@ -70,7 +69,6 @@ public class SFFoods
 			for (final Item item : items) 
 			{
 				registry.register(item);
-				ITEMS.add(item);
 			}
 		}
 	}

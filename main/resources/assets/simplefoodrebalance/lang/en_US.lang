@@ -1,3 +1,8 @@
 itemGroup.foodsTab=Simple Foods Rebalanced
 
 tile.melon.name=Melon
+tile.pumpkin.name=Pumpkin
+tile.pumpkinFace.name=Unlit Jack 'o Lantern
+tile.pumpkinFaceLit.name=Jack 'o Lantern
+
+item.salt.name=Salt

@@ -1,0 +1,8 @@
+{
+    "parent": "block/orientable",
+    "textures": {
+        "top": "simplefoodrebalance:blocks/pumpkintop",
+        "front": "simplefoodrebalance:blocks/pumpkinface",
+        "side": "simplefoodrebalance:blocks/pumpkinside"
+    }
+}

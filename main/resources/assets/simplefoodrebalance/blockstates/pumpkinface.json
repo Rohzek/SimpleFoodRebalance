@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "facing=north": { "model": "simplefoodrebalance:pumpkinface" },
+        "facing=south": { "model": "simplefoodrebalance:pumpkinface", "y": 180 },
+        "facing=west":  { "model": "simplefoodrebalance:pumpkinface", "y": 270 },
+        "facing=east":  { "model": "simplefoodrebalance:pumpkinface", "y": 90 }
+    }
+}

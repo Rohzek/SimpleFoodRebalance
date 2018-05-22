@@ -1,5 +1,6 @@
 {
     "variants": {
-        "normal": { "model": "simplefoodrebalance:melon" }
+        "normal": { "model": "simplefoodrebalance:melon" },
+		"inventory" : { "model" : "simplefoodrebalance:melon" }
     }
 }

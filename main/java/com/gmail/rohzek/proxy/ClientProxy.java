@@ -14,16 +14,4 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
  * @author Rohzek
  *
  */
-@Mod.EventBusSubscriber
-public class ClientProxy extends CommonProxy
-{
-	@Override
-	@SubscribeEvent
-	public void registerRenders(ModelRegistryEvent event)
-	{
-		SFFoods.registerRenders();
-		SFIngredients.registerRenders();
-		SFBlocks.registerRenders();
-		SFItems.registerRenders();
-	}
-}
+public class ClientProxy extends CommonProxy {}

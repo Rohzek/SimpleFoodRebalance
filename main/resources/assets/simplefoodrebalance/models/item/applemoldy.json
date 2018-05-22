@@ -1,6 +1,6 @@
 {
-    "parent": "item/generated",
+    "parent": "item/handheld",
     "textures": {
-        "layer0": "simplefoods:items/food/moldy/apple"
+        "layer0": "simplefoodrebalance:items/food/moldy/apple"
     }
 }
