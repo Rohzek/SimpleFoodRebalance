@@ -50,13 +50,21 @@ public class FoodSpoilable extends ItemFood
 	@Override
 	public void onUpdate(ItemStack itemStack, World world, Entity player, int par4, boolean par5) 
 	{
-		if(!world.isRemote){}
+		if(!world.isRemote)
+		{
+			SpoilageHelper.spoil(itemStack, world.getTotalWorldTime(), true);
+		}
 	}
 	
 	@Override
 	public boolean onEntityItemUpdate(EntityItem entity)
 	{
-		// return true if moldy
+		if(!entity.world.isRemote) 
+		{
+			SpoilageHelper.spoil(entity.getItem(), entity.world.getTotalWorldTime(), false);
+		}
+		
+		// Returning true does some weird stuff.
 		return false;
 	}
 	

@@ -25,7 +25,7 @@ public class SFFoods
 	public static int fresh = 0, stale = 1, moldy = 2;
 	public static String conFresh = "fresh", conStale = "stale", conMoldy = "moldy";
 	
-	public static FoodSpoilable APPLE = new FoodSpoilable("apple", 1, 0.5f, false, 300, true);
+	public static FoodSpoilable APPLE = new FoodSpoilable("apple", 1, 0.5f, false, timeDay, true);
 	
 	public static void registerOreDicts() {}
 	
@@ -51,8 +51,7 @@ public class SFFoods
 		}
 		
 		public static void registerRender(Item item, int meta, String addon)
-		{	
-			System.out.println("I should be registering " + item.getRegistryName() + addon);
+		{
 			ModelLoader.setCustomModelResourceLocation(item, meta, new ModelResourceLocation(item.getRegistryName() + addon, "inventory"));
 		}
 		
